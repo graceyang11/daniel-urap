@@ -1,0 +1,80 @@
+.body {
+    background-color: #f0f0f0; /* Light gray background */
+    margin: 0;
+    height: 100vh; /* Ensure full viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .draggable-element {
+    position: absolute;
+    cursor: grab;
+    z-index: 2; /* Ensure draggable elements appear above others */
+  }
+  
+  #draggable-box {
+    width: 100px;
+    height: 100px;
+    background-color: #87CEEB; /* Sky blue color */
+    border: 2px solid darkblue; /* Darker border for contrast */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    border-radius: 8px; /* Rounded corners */
+    z-index: 3;
+  }
+        
+  #draggable-box-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: darkblue;
+        font-size: 20px;
+        }
+  
+  .non-draggable-circle {
+    width: 100px;
+    height: 100px;
+    background-color: #4C4C4C; /* Dark gray color */
+    border: 2px solid black; /* Darker border for contrast */
+    border-radius: 50%;
+  }
+  
+  .non-draggable-box {
+    width: 100px;
+    height: 100px;
+    background-color: #FF6347; /* Tomato red color */
+    border: 2px solid black; /* Darker border for contrast */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    border-radius: 8px; /* Rounded corners */
+  }
+  
+  .arena-circle-1 {
+    width: 700px;
+    height: 700px;
+    background-color: lightblue; /* Make the arena circles transparent */
+    border: 2px dashed #808080; /* Dashed border for a visual boundary */
+    border-radius: 50%;
+    opacity: 0.5;
+    position: absolute;
+  }
+        
+  .arena-circle-2 {
+    width: 700px;
+    height: 700px;
+    background-color: lightpink; /* Make the arena circles transparent */
+    border: 2px dashed #808080; /* Dashed border for a visual boundary */
+    border-radius: 50%;
+    opacity: 0.5;
+    position: absolute;
+  }
+  
+  #feedback {
+    position: absolute;
+    font-size: 48px;
+    font-weight: bold;
+    color: #32CD32; /* Lime green color for feedback */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add a subtle text shadow */
+    z-index: 3;
+  }
+  
