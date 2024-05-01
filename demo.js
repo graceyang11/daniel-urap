@@ -1,12 +1,34 @@
+
+// const setData = function(data) {
+//   data.left = newLeft;
+//   data.right = newRight;
+
+//   console.log(data);
+// }
+// const trialProperties = [
+//   { startLeft: '100px', startTop: '100px', ndcLeft: '200px', ndcTop: '200px', ndbLeft: '300px', ndbTop: '300px' },
+//   // Add more properties for each trial as needed
+// ];
+
 const draggableBoxTrial = {
-    type: 'html-keyboard-response',
-    stimulus: '<div id="arena-circle-1" class="arena-circle-1 draggable-element"></div>' +
-              '<div id="arena-circle-2" class="arena-circle-2 draggable-element"></div>' +
-              '<div id="draggable-box" class="draggable-element"> <div id="draggable-box-content">Place Me</div>  </div>' +
-              '<div class="non-draggable-circle draggable-element" id="non-draggable-circle"></div>' +
-              '<div class="non-draggable-box draggable-element" id="non-draggable-box"></div>' +
-              '<div id="feedback"></div>',
-    
+  type: 'html-keyboard-response',
+  stimulus: '<div id="arena-circle-1" class="arena-circle-1 draggable-element"></div>' +
+            '<div id="arena-circle-2" class="arena-circle-2 draggable-element"></div>' +
+            '<div id="draggable-box" class="draggable-element"> <div id="draggable-box-content">Place Me</div>  </div>' +
+            '<div class="non-draggable-circle draggable-element" id="non-draggable-circle"></div>' +
+            '<div class="non-draggable-box draggable-element" id="non-draggable-box"></div>' +
+            '<div id="feedback"></div>',
+  choices: ['NO_KEYS'],
+  on_finish: function(data) {
+    console.log('saving now');
+    // data.test = feedbacks;
+    // data.feedback = feedbacks;
+    // data.newLefts = newLefts;
+    // data.newTops = newTops;
+  },
+
+
+      
 //    data: {startLeft: startleft, startTop: starttop, 
 //           ndcleft: nonDraggableCircle.style.left, ndctop: nonDraggableCircle.style.top,
 //          ndbleft: nonDraggableBox.style.left, ndbtop: nonDraggableBox.style.top},
@@ -19,7 +41,8 @@ const draggableBoxTrial = {
       const feedback = document.getElementById('feedback');
       const dropLefts = [];
       const dropTops = [];
-      const feedbacks = [];
+      var feedbacks = [];
+
 
       // Set initial positions
       arenaCircle1.style.left = -500+2*getRandomPosition() + 'px' //window.innerWidth / 2 + 'px';
@@ -45,14 +68,16 @@ const draggableBoxTrial = {
       nonDraggableBox.style.backgroundColor = getRandomColor();
         
       // draggable box start
-      jsPsych.data.addDataToLastTrial({ startleft: draggableBox.style.left });
-      jsPsych.data.addDataToLastTrial({ starttop: draggableBox.style.top });
-      //circle start    
-      jsPsych.data.addDataToLastTrial({ ndcleft: nonDraggableCircle.style.left });
-      jsPsych.data.addDataToLastTrial({ ndctop: nonDraggableCircle.style.top });
-      //non draggable box start  
-      jsPsych.data.addDataToLastTrial({ ndbleft: nonDraggableBox.style.left });
-      jsPsych.data.addDataToLastTrial({ ndbtop: nonDraggableBox.style.top });
+
+      //COMMENTED OUT TEMP
+      // jsPsych.data.addDataToLastTrial({ startleft: draggableBox.style.left });
+      // jsPsych.data.addDataToLastTrial({ starttop: draggableBox.style.top });
+      // // circle start    
+      // jsPsych.data.addDataToLastTrial({ ndcleft: nonDraggableCircle.style.left });
+      // jsPsych.data.addDataToLastTrial({ ndctop: nonDraggableCircle.style.top });
+      // // non draggable box start  
+      // jsPsych.data.addDataToLastTrial({ ndbleft: nonDraggableBox.style.left });
+      // jsPsych.data.addDataToLastTrial({ ndbtop: nonDraggableBox.style.top });
         
       // draggable box start
 //      jsPsych.addData({ startleft: draggableBox.style.left });
@@ -87,11 +112,11 @@ const draggableBoxTrial = {
           draggableBox.style.left = `${newLeft}px`;
           draggableBox.style.top = `${newTop}px`;
             
-          dropLefts.push(newLeft)
-          dropTops.push(newTop);
+          //dropLefts.push(newLeft)
+          //dropTops.push(newTop);
 //            
-          jsPsych.data.addDataToLastTrial({ newleft: dropLefts });
-          jsPsych.data.addDataToLastTrial({ newtop: dropTops });  
+          //jsPsych.data.addDataToLastTrial({ newleft: dropLefts });
+          //jsPsych.data.addDataToLastTrial({ newtop: dropTops });  
         }
       }
 
@@ -108,8 +133,8 @@ const draggableBoxTrial = {
         dropLefts.push(newLeft)
         dropTops.push(newTop);
 
-        jsPsych.data.addDataToLastTrial({ newleft: dropLefts });
-        jsPsych.data.addDataToLastTrial({ newtop: dropTops });
+        // jsPsych.data.addDataToLastTrial({ newleft: dropLefts });
+        // jsPsych.data.addDataToLastTrial({ newtop: dropTops });
 //          
 //        jsPsych.addData({ newleft: dropLefts });
 //        jsPsych.addData({ newtop: dropTops });
@@ -128,9 +153,15 @@ const draggableBoxTrial = {
         }
           
         // Save feedback in the data object
-        feedbacks.push(feedback.textContent)
+        feedbacks.push(feedback.textContent);
+
         jsPsych.data.addDataToLastTrial({ feedback: feedbacks });
 //        jsPsych.addData({ feedback: feedbacks });
+      //   jsPsych.data.addProperties({
+      //     feedback: feedbacks,
+      //     newLeft: dropLefts,
+      //     newTop: dropTops
+      //  });
           
         // Print data
         console.log("New Left:", newLeft);
@@ -186,22 +217,41 @@ const draggableBoxTrial = {
 //  timeline.push(blockTrial)
 //  timeline.push(instructionsTrial)
 //  timeline.push(blockTrial)
-  for (let block = 0; block < 3; block++) {
-     for (let i = 0; i < 10; i++) {
+  for (let block = 0; block < 2; block++) {
+     for (let i = 0; i < 2; i++) { //can adjust i < [# of trials] 
        timeline.push(draggableBoxTrial);
+
      }
-     if (block < 0) {
+     if (block < 1) { //replace < with == to end trial
        console.log(block);
 //       timeline.push(instructionsTrial);
        timeline.push(blockTrial);
+       
 //       timeline.push(instructionsTrial);
-//       timeline.push(blockTrial);
+       
      }
    };
+    timeline.push(endTrial)
     
-  timeline.push(endTrial);
+
+    jsPsych.data.addProperties({
+      test: 'grace',
+    });
+    // const properties = trialProperties.shift();
+
+    // const draggableBox = document.getElementById('draggable-box');
+    // const nonDraggableCircle = document.getElementById('non-draggable-circle');
+    // const nonDraggableBox = document.getElementById('non-draggable-box');
+
+    // // Set initial positions using trial properties
+    // draggableBox.style.left = properties.startLeft;
+    // draggableBox.style.top = properties.startTop;
+    // nonDraggableCircle.style.left = properties.ndcLeft;
+    // nonDraggableCircle.style.top = properties.ndcTop;
+    // nonDraggableBox.style.left = properties.ndbLeft;
+    // nonDraggableBox.style.top = properties.ndbTop;
     
-  console.log(timeline);
+    // jsPsych.data.addProperties(properties);
 
   // Initialize jsPsych
   jsPsych.init({
@@ -210,6 +260,7 @@ const draggableBoxTrial = {
       // Handle end of experiment, if needed
       // For example, save data or navigate to the next part of the study
       const data = jsPsych.data.get();
+      data.test = 'daniel'
       console.log(timeline)
       console.log(data.values()); // You can access the data collected in the experiment
       console.log(window.innerWidth);
